@@ -7,51 +7,71 @@ import {
     Text
 } from 'react-native';
 import {
-    Container,
-    Card,
-    CardItem,
-    Body,
+    Container
 } from 'native-base';
 
+import { MyCard } from './components/MyCard'
+
+const backgroundImage = require('../../assets/background.jpg');
 
 export default class SettingsScreen extends React.Component {
+    state = {
+        someData: [
+            {
+                key: 1,
+                nome: "Fábio",
+                origem: "Rua Joaquim Moreira - Sepetiba",
+                destino: "Estrada do Magarça - Magarça",
+                data: '26/06/2018'
+            },
+            {
+                key: 2,
+                nome: "Adrielly",
+                origem: "Rua Joaquim Moreira - Sepetiba",
+                destino: "Rua Sargento Rosa - Diplomata",
+                data: '12/05/2001'
+            },
+            {
+                key: 3,
+                nome: "Zenaide",
+                origem: "Rua Joaquim Moreira - Sepetiba",
+                destino: "Rua Dona Júlia - Sepetiba",
+                data: '19/12/1954'
+            },
+            {
+                key: 4,
+                nome: "Gabriel S.",
+                origem: "Rua Parazinho - Vila Nova",
+                destino: "UEZO",
+                data: '19/12/1954'
+            }
+        ]
+    };
+    
     render() {
         return (
-            <Container style={{ flex: 1 }}>
+            <View style={{ flex: 1 }}>
                 <ImageBackground
-                    source={require('../../assets/background.jpg')}
+                    source={backgroundImage}
                     resizeMode="cover"
                     style={styles.image}
                 >
                     <View style={styles.rect}>
-                        <View style={{ marginTop: 10, marginLeft: 10, marginBottom: 20 }}> 
-                            <Text style={{ fontSize: 17, fontWeight: '700' }}> 
-                                Listagem de Entregas 
+                        <View style={styles.headerTextContainer}>
+                            <Text style={{ fontSize: 17, fontWeight: '700' }}>
+                                Listagem de Entregas
                             </Text>
                         </View>
                         <ScrollView style={{ marginLeft: 10, marginRight: 10 }}>
-                            <Card>
-                                <CardItem header bordered>
-                                    <Text>Nome do Cliente</Text>
-                                </CardItem>
-                                <CardItem bordered>
-                                    <Body>
-                                        <Text>
-                                            Origem: alguma coisa
-                                        </Text>
-                                        <Text style={{ marginTop: 10 }}>
-                                            Destino: alguma outra coisa
-                                        </Text>
-                                    </Body>
-                                </CardItem>
-                                <CardItem footer bordered>
-                                    <Text>Data limite qualquer</Text>
-                                </CardItem>
-                            </Card>
+                            {
+                                this.state.someData.map(item => ( 
+                                    <MyCard item={item} key={item.key} />
+                                ))
+                            }
                         </ScrollView>
                     </View>
                 </ImageBackground>
-            </Container>
+            </View>
         );
     }
 }
@@ -70,5 +90,12 @@ const styles = StyleSheet.create({
         opacity: 0.80,
         marginTop: 40,
         alignSelf: 'center',
-    }
+    },
+    headerTextContainer: {
+        marginTop: 10,
+        marginLeft: 10,
+        marginBottom: 20
+    },
+
+
 });
