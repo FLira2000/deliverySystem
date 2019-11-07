@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 
 
-export default class SettingsScreen extends React.Component {
+export default class ListagemItemScreen extends React.Component {
     render() {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
