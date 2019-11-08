@@ -14,16 +14,15 @@ import {
 	Button,
 	Icon
  } from "native-base";
+import TextInputMask from 'react-native-text-input-mask';
 
 export default class CadastroItemScreen extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { chosenDate: new Date() };
-		this.setDate = this.setDate.bind(this);
-	}
-
-	setDate(newDate) {
-		this.setState({ chosenDate: newDate });
+	state = {
+		someData: [],
+		newNome: null,
+		newData: null,
+		newPartida: null,
+		newDestino: null
 	}
 
 	render() {
@@ -43,36 +42,34 @@ export default class CadastroItemScreen extends Component {
 								<Item rounded style={styles.inputBox}>
 									<Input
 										placeholder='Nome do Cliente'
+										value={this.state.newNome}
+										onChangeText={(newNome)=> this.setState({ newNome: newNome })}
 									/>
 								</Item>
 								<Item rounded style={styles.inputBox}>
-									<Text style={{ fontSize: 17, alignSelf: 'center', marginLeft: 10 }}> 
-										Data da Entrega: 
-									</Text>
-									<DatePicker
-										defaultDate={new Date(2018, 4, 4)}
-										minimumDate={new Date(2018, 1, 1)}
-										maximumDate={new Date(2018, 12, 31)}
-										locale={"pt"}
-										timeZoneOffsetInMinutes={undefined}
-										modalTransparent={false}
-										animationType={"fade"}
-										androidMode={"default"}
-										placeHolderText="DD/MM/AAAA"
-										textStyle={{ color: "#000000" }}
-										placeHolderTextStyle={{ color: "#005500" }}
-										onDateChange={this.setDate}
-										disabled={false}
+									<TextInputMask
+										refInput={ref => { this.input = ref }}
+										value={this.state.newData}
+										onChangeText={(formatted, extracted) => {
+											this.setState({ newData: formatted })
+										}}
+										mask={"[31]/[12]/[2099]"}
+										placeholder={'Data de Entrega'}
+										style={{ fontSize: 15, marginLeft: 5 }}
 									/>
 								</Item>
 								<Item rounded style={styles.inputBox}>
 									<Input
 										placeholder='Endereço de Partida'
+										value={this.state.newPartida}
+										onChangeText={(newPartida) => { this.setState({ newPartida: newPartida }) }}
 									/>
 								</Item>
 								<Item rounded style={styles.inputBox}>
 									<Input
 										placeholder='Endereço de Destino'
+										value={this.state.newDestino}
+										onChangeText={(newDestino) => { this.setState({ newDestino: newDestino }) }}
 									/>
 								</Item>
 							</Form>
