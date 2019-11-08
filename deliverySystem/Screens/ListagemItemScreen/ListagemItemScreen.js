@@ -4,95 +4,57 @@ import {
     View,
     ImageBackground,
     StyleSheet,
-    Text
+    Text,
 } from 'react-native';
-import { MyCard } from './components/MyCard'
+import { MyCard } from './components/MyCard';
+import { connect } from 'react-redux';
 
 const backgroundImage = require('../../assets/background.jpg');
 
-export default class ListagemItemScreen extends React.Component {
-    state = {
-        someData: [
-            {
-                key: 1,
-                nome: "Fábio",
-                origem: "Rua Joaquim Moreira - Sepetiba",
-                destino: "Estrada do Magarça - Magarça",
-                data: '26/06/2018'
-            },
-            {
-                key: 2,
-                nome: "Adrielly",
-                origem: "Rua Joaquim Moreira - Sepetiba",
-                destino: "Rua Sargento Rosa - Diplomata",
-                data: '12/05/2001'
-            },
-            {
-                key: 3,
-                nome: "Zenaide",
-                origem: "Rua Joaquim Moreira - Sepetiba",
-                destino: "Rua Dona Júlia - Sepetiba",
-                data: '19/12/1954'
-            },
-            {
-                key: 4,
-                nome: "Gabriel S.",
-                origem: "Rua Parazinho - Vila Nova",
-                destino: "UEZO",
-                data: '19/12/1954'
-            }
-        ]
-    };
-    
-    render() {
-        return (
-            <View style={{ flex: 1 }}>
-                <ImageBackground
-                    source={backgroundImage}
-                    resizeMode="cover"
-                    style={styles.image}
-                >
-                    <View style={styles.rect}>
-                        <View style={styles.headerTextContainer}>
-                            <Text style={{ fontSize: 17, fontWeight: '700' }}>
-                                Listagem de Entregas
-                            </Text>
-                        </View>
-                        <ScrollView style={{ marginLeft: 10, marginRight: 10 }}>
-                            {
-                                this.state.someData.map(item => ( 
-                                    <MyCard item={item} key={item.key} />
-                                ))
-                            }
-                        </ScrollView>
-                        <View style={{ marginBottom: 10 }} />
+const ListagemItemScreen = ({ list }) => {
+    return (
+        <View style={{ flex: 1 }}>
+            <ImageBackground
+                source={backgroundImage}
+                resizeMode="cover"
+                style={styles.image}>
+                <View style={styles.rect}>
+                    <View style={styles.headerTextContainer}>
+                        <Text style={{ fontSize: 17, fontWeight: '700' }}>
+                            Listagem de Entregas
+                                </Text>
                     </View>
-                </ImageBackground>
-            </View>
-        );
-    }
+                    <ScrollView style={{ marginLeft: 10, marginRight: 10 }}>
+                        {list.map(item => (
+                            <MyCard item={item} key={item.key} />
+                        ))}
+                    </ScrollView>
+                    <View style={{ marginBottom: 10 }} />
+                </View>
+            </ImageBackground>
+        </View>
+    );
 }
-
 
 const styles = StyleSheet.create({
     image: {
         width: 405,
         height: 700,
-        alignSelf: "center"
+        alignSelf: 'center',
     },
     rect: {
         width: 350,
         height: 584,
-        backgroundColor: "rgba(255,255,255,1)",
-        opacity: 0.80,
+        backgroundColor: 'rgba(255,255,255,1)',
+        opacity: 0.8,
         marginTop: 40,
         alignSelf: 'center',
     },
     headerTextContainer: {
         marginTop: 20,
         marginBottom: 10,
-        alignItems: 'center'
+        alignItems: 'center',
     },
-
-
 });
+
+export default connect(state => ({ list: state }))(ListagemItemScreen)
