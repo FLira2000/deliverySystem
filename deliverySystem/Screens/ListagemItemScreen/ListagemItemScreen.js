@@ -10,7 +10,7 @@ import { MyCard } from './components/MyCard'
 
 const backgroundImage = require('../../assets/background.jpg');
 
-export default class SettingsScreen extends React.Component {
+export default class ListagemItemScreen extends React.Component {
     state = {
         someData: [
             {
