@@ -6,10 +6,6 @@ import {
     StyleSheet,
     Text
 } from 'react-native';
-import {
-    Container
-} from 'native-base';
-
 import { MyCard } from './components/MyCard'
 
 const backgroundImage = require('../../assets/background.jpg');
@@ -69,6 +65,7 @@ export default class SettingsScreen extends React.Component {
                                 ))
                             }
                         </ScrollView>
+                        <View style={{ marginBottom: 10 }} />
                     </View>
                 </ImageBackground>
             </View>
@@ -92,9 +89,9 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     headerTextContainer: {
-        marginTop: 10,
-        marginLeft: 10,
-        marginBottom: 20
+        marginTop: 20,
+        marginBottom: 10,
+        alignItems: 'center'
     },
 
 
