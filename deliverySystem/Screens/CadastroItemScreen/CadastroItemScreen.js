@@ -17,37 +17,41 @@ import {
 	Icon
 } from "native-base";
 import TextInputMask from 'react-native-text-input-mask';
+import { connect } from 'react-redux';
+import { newItemInList } from '../../store/actions';  
+ 
+class CadastroItemScreen extends Component {
+	constructor(state){
+		super()
+		this.list = state.list;
+		this.dispatch = state.dispatch;
+	}
 
-export default class CadastroItemScreen extends Component {
 	state = {
-		someData: [],
 		newNome: null,
 		newData: null,
 		newOrigem: null,
 		newDestino: null,
 		lastKey: 0
 	}
-
-	getLastKey = (dataArray = this.state.someData) => {
+	
+	getLastKey = (dataArray = this.list) => {
 		let count = 0;
 		dataArray.forEach(() => {
 			count++;
 		})
-		return count;
+		return count+1;
 	}
 
 	addNewItemInList = (state = this.state) => {
-		let newArray = state.someData;
-		newArray.push({
-			key: state.lastKey,
+		let newItem = {
+			key: (state.lastKey),
 			nome: state.newNome,
 			data: state.newData,
 			origem: state.newOrigem,
 			destino: state.newDestino
-		});
-		this.setState({ someData: newArray });
-		this.setState({ lastKey: this.getLastKey() });
-
+		};
+		this.dispatch(newItemInList(newItem));
 	}
 
 	clearAllInputBoxes = () => {
@@ -165,3 +169,5 @@ const styles = StyleSheet.create({
 		justifyContent: 'center'
 	}
 });
+
+export default connect( (state) => ({list: state}))(CadastroItemScreen)
