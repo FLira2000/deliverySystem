@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  ScrollView,
-  View,
-  ImageBackground,
-  StyleSheet,
-  Text,
-} from 'react-native';
-import {MyCard} from './components/MyCard';
-import {connect} from 'react-redux';
+import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { connect } from 'react-redux';
+import { MyCard } from './components/MyCard';
 
 const backgroundImage = require('../../assets/background.jpg');
 
