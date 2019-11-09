@@ -1,60 +1,60 @@
 import React from 'react';
 import {
-    ScrollView,
-    View,
-    ImageBackground,
-    StyleSheet,
-    Text,
+  ScrollView,
+  View,
+  ImageBackground,
+  StyleSheet,
+  Text,
 } from 'react-native';
-import { MyCard } from './components/MyCard';
-import { connect } from 'react-redux';
+import {MyCard} from './components/MyCard';
+import {connect} from 'react-redux';
 
 const backgroundImage = require('../../assets/background.jpg');
 
-const ListagemItemScreen = ({ list }) => {
-    return (
-        <View style={{ flex: 1 }}>
-            <ImageBackground
-                source={backgroundImage}
-                resizeMode="cover"
-                style={styles.image}>
-                <View style={styles.rect}>
-                    <View style={styles.headerTextContainer}>
-                        <Text style={{ fontSize: 17, fontWeight: '700' }}>
-                            Listagem de Entregas
-                                </Text>
-                    </View>
-                    <ScrollView style={{ marginLeft: 10, marginRight: 10 }}>
-                        {list.map(item => (
-                            <MyCard item={item} key={item.key} />
-                        ))}
-                    </ScrollView>
-                    <View style={{ marginBottom: 10 }} />
-                </View>
-            </ImageBackground>
+const ListagemItemScreen = ({list}) => {
+  return (
+    <View style={{flex: 1}}>
+      <ImageBackground
+        source={backgroundImage}
+        resizeMode="cover"
+        style={styles.image}>
+        <View style={styles.rect}>
+          <View style={styles.headerTextContainer}>
+            <Text style={{fontSize: 17, fontWeight: '700'}}>
+              Listagem de Entregas
+            </Text>
+          </View>
+          <ScrollView style={{marginLeft: 10, marginRight: 10}}>
+            {list.map(item => (
+              <MyCard item={item} key={item.key} />
+            ))}
+          </ScrollView>
+          <View style={{marginBottom: 10}} />
         </View>
-    );
-}
+      </ImageBackground>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    image: {
-        width: 405,
-        height: 700,
-        alignSelf: 'center',
-    },
-    rect: {
-        width: 350,
-        height: 584,
-        backgroundColor: 'rgba(255,255,255,1)',
-        opacity: 0.8,
-        marginTop: 40,
-        alignSelf: 'center',
-    },
-    headerTextContainer: {
-        marginTop: 20,
-        marginBottom: 10,
-        alignItems: 'center',
-    },
+  image: {
+    width: 405,
+    height: 700,
+    alignSelf: 'center',
+  },
+  rect: {
+    width: 350,
+    height: 584,
+    backgroundColor: 'rgba(255,255,255,1)',
+    opacity: 0.8,
+    marginTop: 40,
+    alignSelf: 'center',
+  },
+  headerTextContainer: {
+    marginTop: 20,
+    marginBottom: 10,
+    alignItems: 'center',
+  },
 });
 
-export default connect(state => ({ list: state }))(ListagemItemScreen)
+export default connect(state => ({list: state}))(ListagemItemScreen);

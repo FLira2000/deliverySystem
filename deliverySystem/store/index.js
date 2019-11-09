@@ -34,8 +34,12 @@ const INITIAL_STATE = [
 function reducer(state = INITIAL_STATE, action){
     
     if(action.type === 'REGISTER'){
-        state.push(action.item);
-    }
+        
+		return [
+			...state.slice(0, state.length),
+			action.item
+		];
+    } 
     
     return state;
 }

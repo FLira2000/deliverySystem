@@ -22,7 +22,8 @@ import { newItemInList } from '../../store/actions';
  
 class CadastroItemScreen extends Component {
 	constructor(state){
-		super()
+		super();
+		this.redux = state;
 		this.list = state.list;
 		this.dispatch = state.dispatch;
 	}
@@ -32,20 +33,14 @@ class CadastroItemScreen extends Component {
 		newData: null,
 		newOrigem: null,
 		newDestino: null,
-		lastKey: 0
 	}
 	
-	getLastKey = (dataArray = this.list) => {
-		let count = 0;
-		dataArray.forEach(() => {
-			count++;
-		})
-		return count+1;
-	}
+	getLastKey = (dataArray = this.list) => dataArray.length + 1
 
 	addNewItemInList = (state = this.state) => {
+		console.log(this.redux);
 		let newItem = {
-			key: (state.lastKey),
+			key: this.getLastKey + 1,
 			nome: state.newNome,
 			data: state.newData,
 			origem: state.newOrigem,
@@ -59,10 +54,6 @@ class CadastroItemScreen extends Component {
 		this.setState({ newDestino: "" });
 		this.setState({ newNome: "" });
 		this.setState({ newOrigem: "" });
-	}
-
-	componentDidMount() {
-		this.setState({ lastKey: this.getLastKey() });
 	}
 
 	render() {
